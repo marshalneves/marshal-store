@@ -17,14 +17,15 @@ namespace MarshalStore.Domain.StoreContext.ValueObjects
                 .IsTrue(Validate(Number), "Document", "Invalid Document")
             );
 
-
         }
 
         public string Number { get; private set; }
 
         public bool Validate(string number)
         {
-            return !(number.Length < 10);
+            if (number.Length > 14) return false;
+
+            return true;
 
         }
 
