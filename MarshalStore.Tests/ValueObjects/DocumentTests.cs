@@ -7,10 +7,21 @@ namespace MarshalStore.Tests
     [TestClass]
     public class DocumentTests
     {
+
+        private Document validDocument;
+        private Document invalidDocument;
+
+        public DocumentTests()
+        {
+            validDocument = new Document("12345678900000");
+            invalidDocument = new Document("1234567890");
+            
+        }
+
         [TestMethod]
         public void ShouldReturnNotificationWhenDocumentIsNotValid()
         {
-            var document = new Document("1234567890000000000");
+            var document = invalidDocument;
             Assert.AreEqual(false,document.IsValid);
 
         }
@@ -18,7 +29,7 @@ namespace MarshalStore.Tests
         [TestMethod]
         public void ShouldReturnNotificationWhenDocumentIsValid()
         {
-            var document = new Document("1234567890");
+            var document = validDocument;
             Assert.AreEqual(true,document.IsValid);
 
         }

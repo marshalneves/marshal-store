@@ -12,6 +12,7 @@ namespace MarshalStore.Domain.StoreContext.ValueObjects
         {
             Number = number;
 
+            //Custom validation example
             AddNotifications(new ValidationContract()
                 .Requires()
                 .IsTrue(Validate(Number), "Document", "Invalid Document")
@@ -23,8 +24,8 @@ namespace MarshalStore.Domain.StoreContext.ValueObjects
 
         public bool Validate(string number)
         {
-            if (number.Length > 14) return false;
-
+            //A simple custom validation
+            if (number.Length != 14) return false;
             return true;
 
         }

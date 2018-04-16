@@ -31,7 +31,7 @@ namespace MarshalStore.Domain.StoreContext.Entities
         {
             if (quantity > product.QuantityOnHand)
             {
-                AddNotification("OrderItem", $"Produto {product.Title} não tem {quantity} itens em estoque");
+                AddNotification("OrderItem", $"Produto {product.Title} nï¿½o tem {quantity} itens em estoque");
             }
 
             var item = new OrderItem(product, quantity);
@@ -42,7 +42,7 @@ namespace MarshalStore.Domain.StoreContext.Entities
         //To Place An Order
         public void Place()
         {
-            //Gera o número do pedido
+            //Gera o nï¿½mero do pedido
             Number = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8).ToUpper();
 
             if (_items.Count == 0)
@@ -63,7 +63,7 @@ namespace MarshalStore.Domain.StoreContext.Entities
             var deliveries = new List<Delivery>();
 
             //Inclui uma entrega
-            deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
+            //deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
 
             //Quebra as entregas
             var count = 1;

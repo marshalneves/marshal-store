@@ -14,9 +14,9 @@ namespace MarshalStore.Domain.StoreContext.Entities
             Price = product.Price;
 
             if(product.QuantityOnHand < quantity)
-            {
                 AddNotification(new Notification("Quantity", "Produto fora de estoque"));
-            }
+
+            product.DecreaseQuantity(quantity);
 
         }
 

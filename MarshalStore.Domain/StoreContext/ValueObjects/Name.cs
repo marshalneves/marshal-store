@@ -14,12 +14,16 @@ namespace MarshalStore.Domain.StoreContext.ValueObjects
             FirstName = firstName;
             LastName = lastName;
 
-            new ValidationContract()
-                .Requires()
-                .HasMinLen(firstName, 3, "FirstName", "First name must be at least 3 characters")
-                .HasMaxLen(firstName, 40, "FirstName", "First name must be less than 40 characters")
-                .HasMinLen(lastName, 3, "LastName", "Last name must be less than 3 characters")
-                .HasMaxLen(lastName, 40, "LastName", "Last name must be less than 40 characters");
+            AddNotifications(
+                
+                new ValidationContract()
+                    .Requires()
+                    .HasMinLen(FirstName, 3, "FirstName", "First name must be at least 3 characters")
+                    .HasMaxLen(FirstName, 40, "FirstName", "First name must be less than 40 characters")
+                    .HasMinLen(LastName, 3, "LastName", "Last name must be less than 3 characters")
+                    .HasMaxLen(LastName, 40, "LastName", "Last name must be less than 40 characters")
+            
+            );
         }
 
         public string FirstName { get; private set; }
