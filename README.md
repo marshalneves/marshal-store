@@ -1,6 +1,6 @@
 # Marshal Store
 
-A simple domain driver design solution in DotNet Core
+A simple domain-driven design solution in DotNet Core
 
 It implements the following concepts:
 
