@@ -13,4 +13,8 @@
     <Folder Include="SharedContext\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MarshalStore.Shared\MarshalStore.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
