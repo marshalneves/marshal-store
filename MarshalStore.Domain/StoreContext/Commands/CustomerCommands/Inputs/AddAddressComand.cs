@@ -2,6 +2,7 @@ using FluentValidator;
 using FluentValidator.Validation;
 using MarshalStore.Share.Commands;
 using MarshalStore.Domain.StoreContext.Enums;
+using System;
 
 namespace BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs
 {
