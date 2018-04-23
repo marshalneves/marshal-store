@@ -1,8 +1,9 @@
 using System;
+using MarshalStore.Shared.Entities;
 
 namespace MarshalStore.Domain.StoreContext.Entities
 {
-    public class Product
+    public class Product : Entity
     {
         public Product(
             string title, 

@@ -2,10 +2,11 @@
 using System.Linq;
 using FluentValidator;
 using MarshalStore.Domain.StoreContext.ValueObjects;
+using MarshalStore.Shared.Entities;
 
 namespace MarshalStore.Domain.StoreContext.Entities
 {
-    public class Customer : Notifiable
+    public class Customer : Entity
     {
 
         private readonly IList<Address> _addresses;

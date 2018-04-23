@@ -5,6 +5,8 @@ using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
 using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Outputs;
 using FluentValidator;
 using MarshalStore.Domain.StoreContext.Entities;
+using MarshalStore.Domain.StoreContext.Repositories;
+using MarshalStore.Domain.StoreContext.Services;
 using MarshalStore.Domain.StoreContext.ValueObjects;
 using MarshalStore.Share.Commands;
 
@@ -14,18 +16,33 @@ namespace MarshalStore.Domain.StoreContext.Handlers
     ICommandHandler<CreateCustomerCommand>,
     ICommandHandler<AddAddressCommand>
     {
-        protected CustomerHandler()
+        private readonly ICustomerRepository _repository;
+        private readonly IEmailService _emailService;
+
+        protected CustomerHandler(ICustomerRepository repository, IEmailService emailService)
         {
+            _repository = repository;
+            _emailService = emailService;
         }
 
         public ICommandResult Handle(CreateCustomerCommand command)
         {
+            //Check Document
+            if (_repository.CheckDocument(command.Document)) {
+                AddNotification("Document","Document already in use");
+            }
+
+            //Check Email
+            if (_repository.CheckEmail(command.Email)) {
+                AddNotification("Email","Email already in use");
+            }
+            
             //Create Value Objects
             var name = new Name(command.FirstName, command.LastName);
             var document = new Document(command.Document);
             var email = new Email(command.Email);
 
-            //Create entity
+            //Create Customer
             var customer = new Customer(name, document, email, command.Phone);
 
             //Validate
@@ -33,7 +50,17 @@ namespace MarshalStore.Domain.StoreContext.Handlers
             AddNotifications(document.Notifications);
             AddNotifications(email.Notifications);
             AddNotifications(customer.Notifications);
+
+            if (Invalid)
+                return null;
+
+            // Persist Customer
+            _repository.Save(customer);
+
+            // Send Welcome Email
+            _emailService.Send(email.Address, "hello@marshalstore.io", "Welcome", "Welcome to MarshalStore");
             
+            //Return results in screen
             return new CreateCustomerCommandResult(Guid.NewGuid(), name.ToString(), email.Address);
         }
 

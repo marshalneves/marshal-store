@@ -1,10 +1,11 @@
 ﻿
 using FluentValidator;
 using MarshalStore.Domain.StoreContext.Enums;
+using MarshalStore.Shared.Entities;
 
 namespace MarshalStore.Domain.StoreContext.Entities
 {
-    public class Address : Notifiable
+    public class Address : Entity
     {
 
         public Address(string street,

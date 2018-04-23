@@ -1,11 +1,12 @@
 using FluentValidator;
 using MarshalStore.Domain.StoreContext.Enums;
+using MarshalStore.Shared.Entities;
 using System;
 using System.Collections.Generic;
 
 namespace MarshalStore.Domain.StoreContext.Entities
 {
-    public class Delivery : Notifiable
+    public class Delivery : Entity
     {
         public Delivery(DateTime estimatedDeliveryDate)
         {
@@ -20,13 +21,13 @@ namespace MarshalStore.Domain.StoreContext.Entities
 
         public void Ship()
         {
-            //Se a data estimada de entrega for no passado, não entregar
+            //Se a data estimada de entrega for no passado, nï¿½o entregar
             Status = EDeliveryStatus.Shipped;
         }
 
         public void Cancel()
         {
-            //Se o status já estiver entregue não pode cancelar
+            //Se o status jï¿½ estiver entregue nï¿½o pode cancelar
             Status = EDeliveryStatus.Canceled;
         }
 
