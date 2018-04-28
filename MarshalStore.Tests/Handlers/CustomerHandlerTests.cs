@@ -1,16 +1,18 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MarshalStore.Domain.StoreContext.Entities;
 using MarshalStore.Domain.StoreContext.ValueObjects;
+using MarshalStore.Domain.StoreContext.Handlers;
 using MarshalStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
+using MarshalStore.Tests.Fakes;
 
 namespace MarshalStore.Tests
 {
     [TestClass]
-    public class CreateCustomerCommandTests
+    public class CustomerHandlerTests
     {
 
         [TestMethod]
-        public void ShouldValidateWhenCommandIsValid(){
+        public void ShouldRegisterCustomerWhenCommandIsValid(){
 
             var command = new CreateCustomerCommand();
             command.FirstName = "Marshal";
@@ -21,6 +23,11 @@ namespace MarshalStore.Tests
 
             Assert.AreEqual(true,command.Valid());
 
+            var handler = new CustomerHandler(new FakeCustomerRepository(), new FakeEmailService());
+            var result = handler.Handle(command);
+
+            Assert.AreNotEqual(null, result);
+            Assert.AreEqual(true, handler.IsValid);
 
         }
     }

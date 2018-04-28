@@ -1,7 +1,7 @@
 using System;
 using MarshalStore.Share.Commands;
 
-namespace BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Outputs
+namespace MarshalStore.Domain.StoreContext.Commands.CustomerCommands.Outputs
 {
    
     public class CreateCustomerCommandResult : ICommandResult

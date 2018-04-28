@@ -2,7 +2,7 @@ using FluentValidator;
 using FluentValidator.Validation;
 using MarshalStore.Share.Commands;
 
-namespace BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs
+namespace MarshalStore.Domain.StoreContext.Commands.CustomerCommands.Inputs
 {
    
     public class CreateCustomerCommand : Notifiable, ICommand

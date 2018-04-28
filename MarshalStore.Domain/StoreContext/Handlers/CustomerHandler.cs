@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
-using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Outputs;
 using FluentValidator;
+using MarshalStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
+using MarshalStore.Domain.StoreContext.Commands.CustomerCommands.Outputs;
 using MarshalStore.Domain.StoreContext.Entities;
 using MarshalStore.Domain.StoreContext.Repositories;
 using MarshalStore.Domain.StoreContext.Services;
@@ -19,7 +19,7 @@ namespace MarshalStore.Domain.StoreContext.Handlers
         private readonly ICustomerRepository _repository;
         private readonly IEmailService _emailService;
 
-        protected CustomerHandler(ICustomerRepository repository, IEmailService emailService)
+        public CustomerHandler(ICustomerRepository repository, IEmailService emailService)
         {
             _repository = repository;
             _emailService = emailService;
