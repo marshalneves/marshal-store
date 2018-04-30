@@ -5,6 +5,8 @@ using FluentValidator;
 using MarshalStore.Domain.StoreContext.Enums;
 using MarshalStore.Shared.Entities;
 
+
+//te mostrar aqui um domínio rico de um curso que eu fiz
 namespace MarshalStore.Domain.StoreContext.Entities
 {
     public class Order : Entity
@@ -41,6 +43,7 @@ namespace MarshalStore.Domain.StoreContext.Entities
         }
 
         //To Place An Order
+        //comportamentos todos no domínio
         public void Place()
         {
             //Gera o n�mero do pedido
