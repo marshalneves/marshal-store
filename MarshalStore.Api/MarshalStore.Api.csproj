@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MarshalStore.Domain\MarshalStore.Domain.csproj" />
     <ProjectReference Include="..\MarshalStore.Shared\MarshalStore.Shared.csproj" />
+    <ProjectReference Include="..\MarshalStore.Infra\MarshalStore.Infra.csproj" />
   </ItemGroup>
 
 </Project>

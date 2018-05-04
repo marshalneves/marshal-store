@@ -10,6 +10,8 @@ namespace MarshalStore.Shared.Entities
         public Entity()
         {
             Id = Guid.NewGuid();
+
+            
         }
     }
 
