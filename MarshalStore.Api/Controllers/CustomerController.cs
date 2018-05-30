@@ -7,6 +7,7 @@ using MarshalStore.Domain.StoreContext.Handlers;
 using MarshalStore.Domain.StoreContext.Queries;
 using MarshalStore.Domain.StoreContext.Repositories;
 using MarshalStore.Domain.StoreContext.ValueObjects;
+using MarshalStore.Share.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarshalStore.Api.Controllers
@@ -66,13 +67,9 @@ namespace MarshalStore.Api.Controllers
 
         [HttpPost]
         [Route("customers")]
-        public object Post([FromBody]CreateCustomerCommand command){
+        public ICommandResult Post([FromBody]CreateCustomerCommand command){
             
             var result = (CreateCustomerCommandResult)_handler.Handle(command);
-
-            if (_handler.Invalid)
-               return BadRequest(_handler.Notifications);
-
             return result;
 
         }

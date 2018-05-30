@@ -52,7 +52,9 @@ namespace MarshalStore.Domain.StoreContext.Handlers
             AddNotifications(customer.Notifications);
 
             if (Invalid)
-                return null;
+                return new CommandResult(false, 
+                    "Por favor, corrija os campos abaixo", 
+                    Notifications);
 
             // Persist Customer
             _repository.Save(customer);
@@ -61,7 +63,14 @@ namespace MarshalStore.Domain.StoreContext.Handlers
             _emailService.Send(email.Address, "hello@marshalstore.io", "Welcome", "Welcome to MarshalStore");
             
             //Return results in screen
-            return new CreateCustomerCommandResult(Guid.NewGuid(), name.ToString(), email.Address);
+            return new CommandResult(true, 
+                    "Bem vindo ao Marshal Store", 
+                    new {
+                        Id = customer.Id, 
+                        Name = name.ToString(), 
+                        Email = email.Address
+                    }
+            );
         }
 
         public ICommandResult Handle(AddAddressCommand command)

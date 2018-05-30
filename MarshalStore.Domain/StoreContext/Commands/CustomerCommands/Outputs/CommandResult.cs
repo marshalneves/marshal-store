@@ -1,12 +1,10 @@
-using System;
 using MarshalStore.Share.Commands;
 
 namespace MarshalStore.Domain.StoreContext.Commands.CustomerCommands.Outputs
 {
-   
-    public class CreateCustomerCommandResult : ICommandResult
+    public class CommandResult : ICommandResult
     {
-        public CreateCustomerCommandResult(bool success, string message, object data)
+        public CommandResult(bool success, string message, object data)
         {
             Success = success;
             Message = message;
@@ -18,7 +16,3 @@ namespace MarshalStore.Domain.StoreContext.Commands.CustomerCommands.Outputs
         public object Data { get; set; }
     }
 }
-
-
-
-
