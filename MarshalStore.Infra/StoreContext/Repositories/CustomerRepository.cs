@@ -20,6 +20,22 @@ namespace MarshalStore.Infra.StoreContext.Repositories
             _context = context;
         }
 
+        public IEnumerable<ListCustomerQueryResult> Get()
+        {
+             return
+                _context
+                .Connection
+                .Query<ListCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [LastName], [Document], [Email] FROM [Customer]");
+        }
+        public GetCustomerQueryResult Get(Guid id)
+        {
+             return
+                _context
+                .Connection
+                .Query<GetCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [LastName], [Document], [Email] FROM [Customer] WHERE [Id]=@Id", new {id = id})
+                .FirstOrDefault();
+        }
+
         public bool CheckDocument(string document)
         {
             return
@@ -43,23 +59,6 @@ namespace MarshalStore.Infra.StoreContext.Repositories
                 .FirstOrDefault();
         }
 
-        public IEnumerable<ListCustomerQueryResult> Get()
-        {
-            return
-                _context
-                .Connection
-                .Query<ListCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer]", new { });
-        }
-
-        public GetCustomerQueryResult Get(Guid id)
-        {
-            return
-                _context
-                .Connection
-                .Query<GetCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer] WHERE [Id]=@id", new { id = id })
-                .FirstOrDefault();
-        }
-
         public CustomerOrdersCountResult GetCustomerOrdersCount(string document)
         {
             return _context
@@ -73,10 +72,16 @@ namespace MarshalStore.Infra.StoreContext.Repositories
 
         public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
         {
+
+            var qryString = "SELECT [Id], "
+                                + " ,[CreateDate] "
+                                + " ,[Status] "
+                                + " FROM [Orders]"
+                                + " WHERE [CustomerId] = @id";
             return
                 _context
                 .Connection
-                .Query<ListCustomerOrdersQueryResult>("", new { id = id });
+                .Query<ListCustomerOrdersQueryResult>(qryString, new { id = id });
         }
 
         public void Save(Customer customer)

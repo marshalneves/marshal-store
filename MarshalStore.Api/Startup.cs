@@ -1,4 +1,5 @@
-﻿using MarshalStore.Domain.StoreContext.Repositories;
+﻿using MarshalStore.Domain.StoreContext.Handlers;
+using MarshalStore.Domain.StoreContext.Repositories;
 using MarshalStore.Domain.StoreContext.Services;
 using MarshalStore.Infra.DataContexts;
 using MarshalStore.Infra.StoreContext.Repositories;
@@ -22,6 +23,7 @@ namespace MarshalStore.Api
             services.AddScoped<MarshalDataContext, MarshalDataContext>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<CustomerHandler, CustomerHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
